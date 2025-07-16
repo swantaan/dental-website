@@ -17,7 +17,7 @@ const Navigation = () => {
     { name: 'Home', id: 'hero' },
     { name: 'Services', id: 'services' },
     { name: 'Doctors', id: 'doctors' },
-    { name: 'Laboratory', id: 'laboratory' },
+    { name: 'Information', id: 'information' },
     { name: 'Contact', id: 'contact' }
   ];
 
@@ -28,7 +28,7 @@ const Navigation = () => {
           {/* Logo/Title */}
           <div className="flex-shrink-0">
             <h1 className="text-xl sm:text-2xl font-bold text-foreground">
-              Dental Care
+              Dentists in George
             </h1>
           </div>
 
@@ -46,7 +46,7 @@ const Navigation = () => {
             <Button 
               size="sm" 
               className="bg-primary hover:bg-primary/90 text-primary-foreground"
-              onClick={() => scrollToSection('contact')}
+              onClick={() => window.location.href = 'tel:+27448746455'}
             >
               <Phone className="mr-2 h-4 w-4" />
               Call Now
@@ -82,7 +82,7 @@ const Navigation = () => {
                 <Button 
                   size="sm" 
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-                  onClick={() => scrollToSection('contact')}
+                  onClick={() => window.location.href = 'tel:+27448746455'}
                 >
                   <Phone className="mr-2 h-4 w-4" />
                   Call Now
