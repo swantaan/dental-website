@@ -28,12 +28,8 @@ All colors MUST be HSL.
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 180 50% 85%;
-    --accent-foreground: 0 0% 9%;
-
-    --turquoise: 180 70% 70%;
-    --turquoise-light: 180 60% 90%;
-    --turquoise-dark: 180 80% 50%;
+    --accent: 174 30% 25%;  /* Very subtle dark turquoise accent */
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;

@@ -52,11 +52,6 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				turquoise: {
-					DEFAULT: 'hsl(var(--turquoise))',
-					light: 'hsl(var(--turquoise-light))',
-					dark: 'hsl(var(--turquoise-dark))'
-				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',

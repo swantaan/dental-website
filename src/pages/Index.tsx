@@ -17,6 +17,7 @@ import {
   Award,
   Clock
 } from "lucide-react";
+import Navigation from "@/components/Navigation";
 
 const Index = () => {
   const services = [
@@ -65,47 +66,50 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Navigation />
+      
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center">
+      <section id="hero" className="relative min-h-screen flex items-center justify-center pt-16">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
           style={{
             backgroundImage: "url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1920&h=1080&fit=crop')"
           }}
         />
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
-          <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
             Excellence in 
-            <span className="block text-turquoise-dark">Dental Care</span>
+            <span className="block text-accent">Dental Care</span>
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Providing comprehensive dental services with advanced technology and compassionate care for your entire family.
           </p>
           <Button 
             size="lg" 
-            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg font-semibold"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold"
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            <Phone className="mr-2 h-5 w-5" />
+            <Phone className="mr-2 h-4 sm:h-5 w-4 sm:w-5" />
             Schedule Appointment
           </Button>
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="py-20 px-6 bg-muted/50">
+      <section id="services" className="py-16 sm:py-20 px-4 sm:px-6 bg-muted/50">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
               Our Services
             </h2>
-            <div className="w-20 h-1 bg-turquoise-dark mx-auto"></div>
+            <div className="w-16 sm:w-20 h-1 bg-accent mx-auto"></div>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto">
             {services.map((service, index) => (
-              <div key={index} className="flex items-center space-x-4">
-                <CheckCircle className="h-6 w-6 text-turquoise-dark flex-shrink-0" />
-                <span className="text-lg text-foreground">{service}</span>
+              <div key={index} className="flex items-center space-x-3 sm:space-x-4">
+                <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-accent flex-shrink-0" />
+                <span className="text-base sm:text-lg text-foreground">{service}</span>
               </div>
             ))}
           </div>
@@ -113,14 +117,14 @@ const Index = () => {
       </section>
 
       {/* Doctors Section */}
-      <section className="py-20 px-6">
+      <section id="doctors" className="py-16 sm:py-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
               Meet Our Doctors
             </h2>
-            <div className="w-20 h-1 bg-turquoise-dark mx-auto mb-6"></div>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <div className="w-16 sm:w-20 h-1 bg-accent mx-auto mb-6"></div>
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
               Our experienced team of dental professionals is dedicated to providing you with the highest quality care.
             </p>
           </div>
@@ -135,28 +139,28 @@ const Index = () => {
                         <img
                           src={doctor.image}
                           alt={doctor.name}
-                          className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-turquoise-light"
+                          className="w-28 h-28 sm:w-32 sm:h-32 rounded-full mx-auto object-cover border-4 border-muted"
                         />
                       </div>
-                      <h3 className="text-2xl font-bold text-foreground mb-2">
+                      <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
                         {doctor.name}
                       </h3>
                       <div className="space-y-3">
                         <div className="flex items-center justify-center space-x-2">
-                          <Stethoscope className="h-4 w-4 text-turquoise-dark" />
-                          <span className="text-turquoise-dark font-semibold">
+                          <Stethoscope className="h-4 w-4 text-accent" />
+                          <span className="text-accent font-semibold text-sm sm:text-base">
                             {doctor.specialty}
                           </span>
                         </div>
                         <div className="flex items-center justify-center space-x-2">
                           <Clock className="h-4 w-4 text-muted-foreground" />
-                          <span className="text-muted-foreground">
+                          <span className="text-muted-foreground text-sm sm:text-base">
                             {doctor.experience}
                           </span>
                         </div>
                         <div className="flex items-center justify-center space-x-2">
                           <GraduationCap className="h-4 w-4 text-muted-foreground" />
-                          <span className="text-muted-foreground text-sm">
+                          <span className="text-muted-foreground text-xs sm:text-sm">
                             {doctor.education}
                           </span>
                         </div>
@@ -173,29 +177,29 @@ const Index = () => {
       </section>
 
       {/* Dental Laboratory Section */}
-      <section className="py-20 px-6 bg-muted/50">
+      <section id="laboratory" className="py-16 sm:py-20 px-4 sm:px-6 bg-muted/50">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
               Our Dental Laboratory
             </h2>
-            <div className="w-20 h-1 bg-turquoise-dark mx-auto"></div>
+            <div className="w-16 sm:w-20 h-1 bg-accent mx-auto"></div>
           </div>
           
           <div className="prose prose-lg max-w-none text-center">
-            <p className="text-xl text-muted-foreground leading-relaxed mb-8">
+            <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-6 sm:mb-8">
               Our state-of-the-art dental laboratory is equipped with the latest technology and staffed by skilled technicians 
               who work closely with our dentists to create custom dental restorations. From crowns and bridges to dentures 
               and implant-supported prosthetics, we maintain the highest standards of precision and aesthetics.
             </p>
-            <p className="text-xl text-muted-foreground leading-relaxed mb-8">
+            <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-6 sm:mb-8">
               By having our laboratory on-site, we can ensure faster turnaround times, better quality control, and more 
               affordable pricing for our patients. Our lab technicians use only the finest materials and employ advanced 
               CAD/CAM technology to create restorations that are both beautiful and durable.
             </p>
-            <div className="flex items-center justify-center space-x-2 text-turquoise-dark">
-              <Award className="h-6 w-6" />
-              <span className="text-lg font-semibold">
+            <div className="flex items-center justify-center space-x-2 text-accent">
+              <Award className="h-5 w-5 sm:h-6 sm:w-6" />
+              <span className="text-base sm:text-lg font-semibold">
                 Certified Laboratory Excellence
               </span>
             </div>
@@ -204,26 +208,26 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 px-6">
+      <section id="contact" className="py-16 sm:py-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
               Contact Us
             </h2>
-            <div className="w-20 h-1 bg-turquoise-dark mx-auto"></div>
+            <div className="w-16 sm:w-20 h-1 bg-accent mx-auto"></div>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12">
             {/* Contact Information */}
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               <div>
-                <h3 className="text-2xl font-bold text-foreground mb-6">
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4 sm:mb-6">
                   Get in Touch
                 </h3>
                 <div className="space-y-4">
                   <div className="flex items-center space-x-4">
-                    <div className="bg-turquoise-light p-3 rounded-full">
-                      <Phone className="h-6 w-6 text-turquoise-dark" />
+                    <div className="bg-muted p-3 rounded-full">
+                      <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
                     </div>
                     <div>
                       <p className="font-semibold text-foreground">Phone</p>
@@ -232,8 +236,8 @@ const Index = () => {
                   </div>
                   
                   <div className="flex items-center space-x-4">
-                    <div className="bg-turquoise-light p-3 rounded-full">
-                      <Mail className="h-6 w-6 text-turquoise-dark" />
+                    <div className="bg-muted p-3 rounded-full">
+                      <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
                     </div>
                     <div>
                       <p className="font-semibold text-foreground">Email</p>
@@ -242,8 +246,8 @@ const Index = () => {
                   </div>
                   
                   <div className="flex items-center space-x-4">
-                    <div className="bg-turquoise-light p-3 rounded-full">
-                      <MapPin className="h-6 w-6 text-turquoise-dark" />
+                    <div className="bg-muted p-3 rounded-full">
+                      <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
                     </div>
                     <div>
                       <p className="font-semibold text-foreground">Address</p>
@@ -278,10 +282,10 @@ const Index = () => {
             </div>
 
             {/* Map */}
-            <div className="bg-muted rounded-lg h-96 flex items-center justify-center">
+            <div className="bg-muted rounded-lg h-64 sm:h-96 flex items-center justify-center">
               <div className="text-center text-muted-foreground">
-                <MapPin className="h-12 w-12 mx-auto mb-4 text-turquoise-dark" />
-                <p className="text-lg">Interactive Map</p>
+                <MapPin className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 text-accent" />
+                <p className="text-base sm:text-lg">Interactive Map</p>
                 <p className="text-sm">Map integration would go here</p>
               </div>
             </div>
