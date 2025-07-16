@@ -39,28 +39,28 @@ const Index = () => {
       specialty: "General Dentistry",
       experience: "15+ years",
       education: "DDS, University of Michigan",
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face"
+      //image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face"
     },
     {
       name: "Dr. Michael Chen",
       specialty: "Oral Surgery",
       experience: "12+ years",
       education: "DMD, Harvard School of Dental Medicine",
-      image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face"
+      //image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face"
     },
     {
       name: "Dr. Emily Rodriguez",
       specialty: "Orthodontics",
       experience: "10+ years",
       education: "DDS, UCLA School of Dentistry",
-      image: "https://images.unsplash.com/photo-1594824731317-84ea40e86dd3?w=400&h=400&fit=crop&crop=face"
+      //image: "https://images.unsplash.com/photo-1594824731317-84ea40e86dd3?w=400&h=400&fit=crop&crop=face"
     },
     {
       name: "Dr. David Thompson",
       specialty: "Cosmetic Dentistry",
       experience: "18+ years",
       education: "DDS, NYU College of Dentistry",
-      image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=400&fit=crop&crop=face"
+      //image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=400&fit=crop&crop=face"
     }
   ];
 
@@ -73,7 +73,7 @@ const Index = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
           style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1920&h=1080&fit=crop')"
+            //backgroundImage: "url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1920&h=1080&fit=crop')"
           }}
         />
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6">
