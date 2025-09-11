@@ -122,3 +122,10 @@ nav {
   max-width: 100%;
   overflow-x: hidden;
 }
+
+/* Slightly larger base font size on mobile */
+@media (max-width: 640px) {
+  html {
+    font-size: 17px;
+  }
+}

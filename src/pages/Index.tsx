@@ -17,7 +17,8 @@ import {
   Award,
   Clock,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  ChevronRight
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import { useState, useEffect } from "react";
@@ -25,6 +26,8 @@ import { useState, useEffect } from "react";
 const Index = () => {
   const [showAllServices, setShowAllServices] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [prevImageIndex, setPrevImageIndex] = useState(0);
+  const [activeLayer, setActiveLayer] = useState<1 | 2>(1);
   
   // Dental office background images
   const backgroundImages = [
@@ -33,10 +36,24 @@ const Index = () => {
     "./images/dental-office-3.jpg"  // Waiting room
   ];
 
+  // Gallery images for the practice section
+  const galleryImages = [
+    "./images/entrance.jpg",
+    "./images/entrance2.jpg", 
+    "./images/group_photo.jpg",
+    "./images/receptionist.jpg",
+    "./images/waiting-room.jpg"
+  ];
+
   // Auto-advance slideshow
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % backgroundImages.length);
+      setCurrentImageIndex((previousIndex) => {
+        const nextIndex = (previousIndex + 1) % backgroundImages.length;
+        setPrevImageIndex(previousIndex);
+        setActiveLayer((layer) => (layer === 1 ? 2 : 1));
+        return nextIndex;
+      });
     }, 5000); // Change every 5 seconds
 
     return () => clearInterval(interval);
@@ -55,70 +72,88 @@ const Index = () => {
     });
   }, []);
   
-  const services = [
-    // General & Preventive
-    "Routine dental examination & check-ups",
-    "Scale and polish (general cleaning)",
-    "Deep cleaning and root planning",
-    "Emergency treatment & pain relief",
-    
-    // Restorative
-    "Dental fillings",
-    "Crowns and bridges",
-    "Root canal treatment",
-    "Tooth extractions",
-    "Full and partial dentures",
-    "Denture repairs, relines and addition of teeth",
-    
-    // Advanced & Implants
-    "Implant supported crowns, bridges and dentures",
-    
-    // Cosmetic
-    "Teeth whitening (in chair and at home)",
-    
-    // Protective
-    "Night guards for grinding",
-    "Custom made sport mouth guards",
-    
-    // Paediatric
-    "Paediatric dentistry - We love seeing children!",
-    "Paediatric cleaning (polishing)",
-    "Topical fluoride treatment",
-    "Dental sealants",
-    
-    // Specialized Treatment
-    "Treatment under general anaesthesia",
-    "Treatment under in-chair sedation"
+  const serviceCategories = [
+    {
+      title: "General & Preventive Care",
+      services: [
+        "Routine dental examination & check-ups",
+        "Scale and polish (general cleaning)",
+        "Deep cleaning",
+        "Emergency treatment & pain relief"
+      ]
+    },
+    {
+      title: "Restorative Dentistry",
+      services: [
+        "Dental fillings",
+        "Crowns and bridges",
+        "Root canal treatment",
+        "Tooth extractions",
+        "Full and partial dentures",
+        "Denture repairs, relines and addition of teeth"
+      ]
+    },
+    {
+      title: "Advanced & Implants",
+      services: [
+        "Implant supported crowns, bridges and dentures"
+      ]
+    },
+    {
+      title: "Cosmetic Dentistry",
+      services: [
+        "Teeth whitening (in chair and at home)"
+      ]
+    },
+    {
+      title: "Protective Care",
+      services: [
+        "Night guards for grinding",
+        "Custom made sport mouth guards"
+      ]
+    },
+    {
+      title: "Paediatric Dentistry",
+      services: [
+        "Paediatric dentistry - We love seeing children!",
+        "Paediatric cleaning (polishing)",
+        "Topical fluoride treatment",
+        "Dental sealants"
+      ]
+    },
+    {
+      title: "Specialized Treatment",
+      services: [
+        "Treatment under general anaesthesia",
+        "Treatment under in-chair sedation"
+      ]
+    }
   ];
 
   const doctors = [
     {
       name: "Dr. Flip Coetzee",
       specialty: "General Dentistry",
-      experience: "15+ years",
-      education: "B.Ch. D (Stell), Dip Odont (Stell)",
-      //image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face"
+      education: "B.Ch.D. (Stell.), N.D.T. (Stell)",
+      image: "./images/coetsee.jpg"
     },
     {
       name: "Dr. Jacques Du Plessis",
       specialty: "General Dentistry",
-      experience: "12+ years",
-      education: "B.Ch.D (Pret), PGDip (Pret)",
-      //image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face"
+      education: "B.Ch.D. (PRET), DIP. ODONT (PRET)",
+      image: "./images/dp.jpg"
     },
     {
       name: "Dr Louise Niddrie",
       specialty: "General Dentistry",
-      experience: "2+ years",
-      education: "B.Ch.D (UWC), PGDip (UWC)",
-      //image: "https://images.unsplash.com/photo-1594824731317-84ea40e86dd3?w=400&h=400&fit=crop&crop=face"
+      education: "B.Ch.D. (UWC), PGDip (UWC)",
+      image: "./images/niddrie.jpg"
     },
     {
       name: "Gloudine",
-      specialty: "General Dentistry",
-      experience: "6+ years",
-      education: "B.OH (Stell)",
-      //image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=400&fit=crop&crop=face"
+      specialty: "Oral Hygienist",
+      education: "B.OH (Stell.)",
+      image: "./images/gloudine.jpg"
     }
   ];
 
@@ -128,23 +163,33 @@ const Index = () => {
       
       {/* Hero Section */}
       <section id="hero" className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
-        {/* Background Slideshow */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-15 transition-all duration-1000 ease-in-out"
-          style={{
-            backgroundImage: `url(${backgroundImages[currentImageIndex]})`,
-            backgroundColor: 'hsl(var(--muted))' // Fallback background
-          }}
-        />
+        {/* Background Slideshow (crossfade) */}
+        <div className="absolute inset-0 opacity-40">
+          {/* Layer 1 */}
+          <div
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700 ease-in-out ${activeLayer === 1 ? 'opacity-100' : 'opacity-0'}`}
+            style={{
+              backgroundImage: `url(${backgroundImages[activeLayer === 1 ? currentImageIndex : prevImageIndex]})`,
+              backgroundColor: 'hsl(var(--muted))'
+            }}
+          />
+          {/* Layer 2 */}
+          <div
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700 ease-in-out ${activeLayer === 2 ? 'opacity-100' : 'opacity-0'}`}
+            style={{
+              backgroundImage: `url(${backgroundImages[activeLayer === 2 ? currentImageIndex : prevImageIndex]})`,
+              backgroundColor: 'hsl(var(--muted))'
+            }}
+          />
+        </div>
         {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-background/20"></div>
         
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6">
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
-            Excellence in 
-            <span className="block text-accent">Dental Care</span>
+            Drs Coetzee, Du Plessis & Niddrie
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-foreground">
             Friendly family dentists specializing in general dentistry.
           </p>
           <Button 
@@ -175,34 +220,37 @@ const Index = () => {
             <div className="w-16 sm:w-20 h-1 bg-accent mx-auto"></div>
           </div>
           
-          <div className="relative">
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto relative">
-              {services.slice(0, showAllServices ? services.length : 8).map((service, index) => (
-                <div key={index} className="flex items-center space-x-3 sm:space-x-4">
-                  <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-accent flex-shrink-0" />
-                  <span className="text-base sm:text-lg text-foreground">{service}</span>
+          <div className="space-y-8">
+            {serviceCategories.slice(0, showAllServices ? serviceCategories.length : 4).map((category, categoryIndex) => (
+              <div key={categoryIndex} className="max-w-4xl mx-auto">
+                <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-6 text-center">
+                  {category.title}
+                </h3>
+                <div className="flex flex-col items-center space-y-4 sm:space-y-5 max-w-2xl mx-auto">
+                  {category.services.map((service, serviceIndex) => (
+                    <div key={serviceIndex} className="flex items-center space-x-4 sm:space-x-5 w-full justify-center">
+                      <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-accent flex-shrink-0" />
+                      <span className="text-base sm:text-lg text-foreground text-center">{service}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-              
-              {services.length > 8 && !showAllServices && (
-                <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-muted/50 via-muted/30 to-transparent pointer-events-none"></div>
-              )}
-            </div>
+              </div>
+            ))}
             
-            {services.length > 8 && (
-              <div className="text-center mt-8 relative z-10">
+            {serviceCategories.length > 4 && (
+              <div className="text-center mt-8">
                 <button
                   onClick={() => setShowAllServices(!showAllServices)}
                   className="inline-flex items-center text-primary hover:text-primary/80 transition-colors duration-200 font-medium"
                 >
                   {showAllServices ? (
                     <>
-                      Show Less
+                      Show Less Categories
                       <ChevronUp className="ml-2 h-4 w-4" />
                     </>
                   ) : (
                     <>
-                      Show More Services
+                      Show More Categories
                       <ChevronDown className="ml-2 h-4 w-4" />
                     </>
                   )}
@@ -213,49 +261,97 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Gallery Section */}
+      <section id="gallery" className="py-16 sm:py-20 px-4 sm:px-6 bg-muted/30">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Our Practice
+            </h2>
+            <div className="w-16 sm:w-20 h-1 bg-accent mx-auto mb-6"></div>
+          </div>
+
+          <Carousel 
+            className="w-full max-w-4xl mx-auto"
+            opts={{
+              align: "start",
+              loop: true,
+              dragFree: true,
+              containScroll: "trimSnaps",
+              skipSnaps: false,
+              slidesToScroll: 1,
+            }}
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {galleryImages.map((image, index) => (
+                <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-3/4 lg:basis-2/3">
+                  <div className="relative">
+                    <div className="aspect-[4/3] md:aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl">
+                      <img 
+                        src={image} 
+                        alt={`Practice photo ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="flex bg-background/90 hover:bg-background border-2 border-border shadow-lg z-10 left-2 sm:-left-12" />
+            <CarouselNext className="flex bg-background/90 hover:bg-background border-2 border-border shadow-lg z-10 right-2 sm:-right-12" />
+          </Carousel>
+        </div>
+      </section>
+
       {/* Doctors Section */}
       <section id="doctors" className="py-16 sm:py-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Meet Our Doctors
+              Meet Our Practicioners
             </h2>
             <div className="w-16 sm:w-20 h-1 bg-accent mx-auto mb-6"></div>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Our experienced team of dental professionals is dedicated to providing you with the highest quality care.
-            </p>
           </div>
 
-          <Carousel className="w-full max-w-5xl mx-auto">
-            <CarouselContent>
+          <Carousel 
+            className="w-full max-w-5xl mx-auto"
+            opts={{
+              align: "start",
+              loop: true,
+              dragFree: true,
+              containScroll: "trimSnaps",
+              skipSnaps: false,
+              slidesToScroll: 1,
+            }}
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
               {doctors.map((doctor, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                  <Card className="border border-border hover:shadow-lg transition-shadow duration-300">
-                    <CardContent className="p-6 text-center">
-                      <div className="mb-6">
-                        <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full mx-auto bg-muted border-4 border-muted flex items-center justify-center">
-                          <Stethoscope className="h-8 w-8 sm:h-10 sm:w-10 text-muted-foreground" />
+                <CarouselItem key={index} className="pl-2 md:pl-4 basis-3/4 sm:basis-1/2 lg:basis-1/3">
+                  <Card className="border border-border hover:shadow-lg transition-shadow duration-300 h-full">
+                    <CardContent className="p-8 sm:p-8 text-center h-full flex flex-col">
+                      <div className="mb-8 sm:mb-8">
+                        <div className="w-40 h-40 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-full mx-auto overflow-hidden border-4 border-muted">
+                          <img 
+                            src={doctor.image} 
+                            alt={doctor.name}
+                            className="w-full h-full object-cover"
+                          />
                         </div>
                       </div>
-                      <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
+                      <h3 className="text-2xl sm:text-2xl md:text-3xl font-bold text-foreground mb-4">
                         {doctor.name}
                       </h3>
-                      <div className="space-y-3">
-                        <div className="flex items-center justify-center space-x-2">
-                          <Stethoscope className="h-4 w-4 text-accent" />
-                          <span className="text-accent font-semibold text-sm sm:text-base">
+                      <div className="space-y-4 sm:space-y-4 flex-grow">
+                        <div className="flex items-center justify-center space-x-3">
+                          <Stethoscope className="h-5 w-5 sm:h-5 sm:w-5 text-accent flex-shrink-0" />
+                          <span className="text-accent font-semibold text-base sm:text-base md:text-lg">
                             {doctor.specialty}
                           </span>
                         </div>
-                        <div className="flex items-center justify-center space-x-2">
-                          <Clock className="h-4 w-4 text-muted-foreground" />
+
+                        <div className="flex items-center justify-center space-x-3">
+                          <GraduationCap className="h-5 w-5 sm:h-5 sm:w-5 text-muted-foreground flex-shrink-0" />
                           <span className="text-muted-foreground text-sm sm:text-base">
-                            {doctor.experience}
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-center space-x-2">
-                          <GraduationCap className="h-4 w-4 text-muted-foreground" />
-                          <span className="text-muted-foreground text-xs sm:text-sm">
                             {doctor.education}
                           </span>
                         </div>
@@ -265,8 +361,8 @@ const Index = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="bg-background/80 hover:bg-background border-2 border-border shadow-lg" />
-            <CarouselNext className="bg-background/80 hover:bg-background border-2 border-border shadow-lg" />
+            <CarouselPrevious className="flex bg-background/90 hover:bg-background border-2 border-border shadow-lg z-10 left-2 sm:-left-12" />
+            <CarouselNext className="flex bg-background/90 hover:bg-background border-2 border-border shadow-lg z-10 right-2 sm:-right-12" />
           </Carousel>
         </div>
       </section>
@@ -276,7 +372,7 @@ const Index = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Our Services & Information
+              Information
             </h2>
             <div className="w-16 sm:w-20 h-1 bg-accent mx-auto"></div>
           </div>
@@ -285,18 +381,12 @@ const Index = () => {
             {/* Dental Laboratory */}
             <div className="text-center">
               <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4">
-                Our Dental Laboratory
+                Dental Laboratory
               </h3>
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-4">
                 We are lucky to have Garden Route Dental Lab on our premises. In collaboration with the
                 technician, we can ensure the best possible outcome when it comes to your prosthetic work.
               </p>
-              <div className="flex items-center justify-center space-x-2 text-accent">
-                <Award className="h-5 w-5 sm:h-6 sm:w-6" />
-                <span className="text-sm sm:text-base font-semibold">
-                  Certified Laboratory Excellence
-                </span>
-              </div>
             </div>
 
             {/* Referrals */}
@@ -385,11 +475,11 @@ const Index = () => {
                 <div className="space-y-2 text-muted-foreground">
                   <div className="flex justify-between">
                     <span>Monday - Friday</span>
-                    <span>8:00 AM - 6:00 PM</span>
+                    <span>8:00 AM - 5:00 PM</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Saturday</span>
-                    <span>9:00 AM - 3:00 PM</span>
+                    <span>Closed</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Sunday</span>
@@ -400,12 +490,18 @@ const Index = () => {
             </div>
 
             {/* Map */}
-            <div className="bg-muted rounded-lg h-64 sm:h-96 flex items-center justify-center">
-              <div className="text-center text-muted-foreground">
-                <MapPin className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 text-accent" />
-                <p className="text-base sm:text-lg">Interactive Map</p>
-                <p className="text-sm">Map integration would go here</p>
-              </div>
+            <div className="rounded-lg h-64 sm:h-96 overflow-hidden shadow-lg">
+              <iframe
+                src="https://www.google.com/maps?q=57%20Albert%20Street%2C%20George%2C%20South%20Africa&z=16&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Dental Practice Location - 22 Nelson Mandela Boulevard, George"
+                className="w-full h-full"
+              />
             </div>
           </div>
         </div>
@@ -414,9 +510,8 @@ const Index = () => {
       {/* Footer */}
       <footer className="bg-primary text-primary-foreground py-8 px-6">
         <div className="max-w-6xl mx-auto text-center">
-          <p className="text-lg font-semibold mb-2">Excellence in Dental Care</p>
           <p className="text-primary-foreground/80">
-            © 2024 Dental Practice. All rights reserved.
+            © 2025 Drs Coetzee, Du Plessis & Niddrie. All rights reserved.
           </p>
         </div>
       </footer>

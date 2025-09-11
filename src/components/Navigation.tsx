@@ -27,8 +27,12 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo/Title */}
           <div className="flex-shrink-0">
-            <h1 className="text-xl sm:text-2xl font-bold text-foreground">
-              Dental Care
+            <h1 className="hidden md:block text-xl sm:text-2xl font-bold text-foreground">
+              Drs Coetzee, Du Plessis & Niddrie
+            </h1>
+            <h1 className="md:hidden text-lg font-bold text-foreground">
+            Drs Coetzee,
+            Du Plessis & Niddrie
             </h1>
           </div>
 
@@ -53,8 +57,15 @@ const Navigation = () => {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          {/* Mobile Actions */}
+          <div className="md:hidden flex items-center space-x-3">
+            <a
+              href="tel:(044) 874 6455"
+              aria-label="Call us"
+              className="text-foreground hover:text-accent transition-colors"
+            >
+              <Phone className="h-6 w-6" />
+            </a>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-foreground hover:text-accent transition-colors"
