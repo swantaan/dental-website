@@ -1,17 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { 
-  Carousel, 
-  CarouselContent, 
-  CarouselItem, 
-  CarouselNext, 
-  CarouselPrevious 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
 } from "@/components/ui/carousel";
-import { 
-  Phone, 
-  Mail, 
-  MapPin, 
-  CheckCircle, 
+import {
+  Phone,
+  Mail,
+  MapPin,
+  CheckCircle,
   Stethoscope,
   GraduationCap,
   Award,
@@ -28,7 +28,7 @@ const Index = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [prevImageIndex, setPrevImageIndex] = useState(0);
   const [activeLayer, setActiveLayer] = useState<1 | 2>(1);
-  
+
   // Dental office background images
   const backgroundImages = [
     "./images/dental-office-1.jpg", // Examination room with green chair
@@ -39,7 +39,7 @@ const Index = () => {
   // Gallery images for the practice section
   const galleryImages = [
     "./images/entrance.jpg",
-    "./images/entrance2.jpg", 
+    "./images/entrance2.jpg",
     "./images/group_photo.jpg",
     "./images/receptionist.jpg",
     "./images/waiting-room.jpg"
@@ -71,7 +71,7 @@ const Index = () => {
       img.src = src;
     });
   }, []);
-  
+
   const serviceCategories = [
     {
       title: "General & Preventive Care",
@@ -160,7 +160,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section id="hero" className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
         {/* Background Slideshow (crossfade) */}
@@ -184,7 +184,7 @@ const Index = () => {
         </div>
         {/* Overlay to ensure text readability */}
         <div className="absolute inset-0 bg-background/20"></div>
-        
+
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6">
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
             Drs Coetzee, Du Plessis & Niddrie
@@ -192,8 +192,8 @@ const Index = () => {
           <p className="text-lg sm:text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-foreground">
             Friendly family dentists specializing in general dentistry.
           </p>
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold"
             onClick={() => {
               // Check if mobile and open phone, otherwise scroll to contact
@@ -219,7 +219,7 @@ const Index = () => {
             </h2>
             <div className="w-16 sm:w-20 h-1 bg-accent mx-auto"></div>
           </div>
-          
+
           <div className="space-y-8">
             {serviceCategories.slice(0, showAllServices ? serviceCategories.length : 4).map((category, categoryIndex) => (
               <div key={categoryIndex} className="max-w-4xl mx-auto">
@@ -236,25 +236,26 @@ const Index = () => {
                 </div>
               </div>
             ))}
-            
+
             {serviceCategories.length > 4 && (
               <div className="text-center mt-8">
-                <button
+                <Button
+                  variant="outline"
                   onClick={() => setShowAllServices(!showAllServices)}
-                  className="inline-flex items-center text-primary hover:text-primary/80 transition-colors duration-200 font-medium"
+                  className="gap-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold px-6"
                 >
                   {showAllServices ? (
                     <>
                       Show Less Categories
-                      <ChevronUp className="ml-2 h-4 w-4" />
+                      <ChevronUp className="h-4 w-4" />
                     </>
                   ) : (
                     <>
                       Show More Categories
-                      <ChevronDown className="ml-2 h-4 w-4" />
+                      <ChevronDown className="h-4 w-4" />
                     </>
                   )}
-                </button>
+                </Button>
               </div>
             )}
           </div>
@@ -271,7 +272,7 @@ const Index = () => {
             <div className="w-16 sm:w-20 h-1 bg-accent mx-auto mb-6"></div>
           </div>
 
-          <Carousel 
+          <Carousel
             className="w-full max-w-4xl mx-auto"
             opts={{
               align: "start",
@@ -287,8 +288,8 @@ const Index = () => {
                 <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-3/4 lg:basis-2/3">
                   <div className="relative">
                     <div className="aspect-[4/3] md:aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl">
-                      <img 
-                        src={image} 
+                      <img
+                        src={image}
                         alt={`Practice photo ${index + 1}`}
                         className="w-full h-full object-cover"
                       />
@@ -297,8 +298,8 @@ const Index = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="flex bg-background/90 hover:bg-background border-2 border-border shadow-lg z-10 left-2 sm:-left-12" />
-            <CarouselNext className="flex bg-background/90 hover:bg-background border-2 border-border shadow-lg z-10 right-2 sm:-right-12" />
+            <CarouselPrevious className="flex bg-background hover:bg-primary hover:text-primary-foreground border-2 border-primary shadow-lg z-10 left-2 sm:-left-12" />
+            <CarouselNext className="flex bg-background hover:bg-primary hover:text-primary-foreground border-2 border-primary shadow-lg z-10 right-2 sm:-right-12" />
           </Carousel>
         </div>
       </section>
@@ -313,7 +314,7 @@ const Index = () => {
             <div className="w-16 sm:w-20 h-1 bg-accent mx-auto mb-6"></div>
           </div>
 
-          <Carousel 
+          <Carousel
             className="w-full max-w-5xl mx-auto"
             opts={{
               align: "start",
@@ -327,12 +328,12 @@ const Index = () => {
             <CarouselContent className="-ml-2 md:-ml-4">
               {doctors.map((doctor, index) => (
                 <CarouselItem key={index} className="pl-2 md:pl-4 basis-3/4 sm:basis-1/2 lg:basis-1/3">
-                  <Card className="border border-border hover:shadow-lg transition-shadow duration-300 h-full">
+                  <Card className="border-2 border-primary/20 shadow-sm hover:shadow-xl hover:border-primary transition-all duration-300 h-full">
                     <CardContent className="p-8 sm:p-8 text-center h-full flex flex-col">
                       <div className="mb-8 sm:mb-8">
                         <div className="w-40 h-40 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-full mx-auto overflow-hidden border-4 border-muted">
-                          <img 
-                            src={doctor.image} 
+                          <img
+                            src={doctor.image}
                             alt={doctor.name}
                             className="w-full h-full object-cover"
                           />
@@ -361,8 +362,8 @@ const Index = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="flex bg-background/90 hover:bg-background border-2 border-border shadow-lg z-10 left-2 sm:-left-12" />
-            <CarouselNext className="flex bg-background/90 hover:bg-background border-2 border-border shadow-lg z-10 right-2 sm:-right-12" />
+            <CarouselPrevious className="flex bg-background hover:bg-primary hover:text-primary-foreground border-2 border-primary shadow-lg z-10 left-2 sm:-left-12" />
+            <CarouselNext className="flex bg-background hover:bg-primary hover:text-primary-foreground border-2 border-primary shadow-lg z-10 right-2 sm:-right-12" />
           </Carousel>
         </div>
       </section>
@@ -376,7 +377,7 @@ const Index = () => {
             </h2>
             <div className="w-16 sm:w-20 h-1 bg-accent mx-auto"></div>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8 sm:gap-12">
             {/* Dental Laboratory */}
             <div className="text-center">
@@ -442,7 +443,7 @@ const Index = () => {
                       <a href="tel:(044) 874 6455" className="text-muted-foreground">(044) 874 6455</a>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center space-x-4">
                     <div className="bg-muted p-3 rounded-full">
                       <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
@@ -452,7 +453,7 @@ const Index = () => {
                       <p className="text-muted-foreground">denprak@telkomsa.net</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center space-x-4">
                     <div className="bg-muted p-3 rounded-full">
                       <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
@@ -511,7 +512,7 @@ const Index = () => {
       <footer className="bg-primary text-primary-foreground py-8 px-6">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-primary-foreground/80">
-            © 2025 Drs Coetzee, Du Plessis & Niddrie. All rights reserved.
+            © 2026 Drs Coetzee, Du Plessis & Niddrie. All rights reserved.
           </p>
         </div>
       </footer>
