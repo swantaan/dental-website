@@ -186,8 +186,8 @@ const Index = () => {
         <div className="absolute inset-0 bg-background/20"></div>
 
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6">
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
-            Drs Coetzee, Du Plessis & Niddrie
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
+            Drs Coetzee, <br className="sm:hidden" />Du Plessis &<br className="sm:hidden" /> Niddrie
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-foreground">
             Friendly family dentists specializing in general dentistry.

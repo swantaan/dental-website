@@ -17,7 +17,7 @@ const Navigation = () => {
     { name: 'Home', id: 'hero' },
     { name: 'Services', id: 'services' },
     { name: 'Doctors', id: 'doctors' },
-    { name: 'Laboratory', id: 'laboratory' },
+    { name: 'Information', id: 'services-info' },
     { name: 'Contact', id: 'contact' }
   ];
 
@@ -26,13 +26,9 @@ const Navigation = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Title */}
-          <div className="flex-shrink-0">
-            <h1 className="hidden md:block text-xl sm:text-2xl font-bold text-foreground">
+          <div className="flex-1 min-w-0 pr-2 sm:pr-4">
+            <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-foreground leading-tight">
               Drs Coetzee, Du Plessis & Niddrie
-            </h1>
-            <h1 className="md:hidden text-lg font-bold text-foreground">
-            Drs Coetzee,
-            Du Plessis & Niddrie
             </h1>
           </div>
 
